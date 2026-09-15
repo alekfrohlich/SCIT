@@ -1,0 +1,36 @@
+project: SCIT
+experiment: ???
+experiment_description: ???
+
+# Compute enviornment
+device: 2
+seed: -1
+debug: False
+# profile: False
+
+# Model
+model: NCP
+activation: ELU
+input_dim_x: ???
+input_dim_y: ???
+ouput_dim: ???
+n_hidden: 2
+layer_size: 32
+
+# Optimization
+lr: 5e-4
+regularization_strength: 1e-3
+batch_size: 4096
+max_epochs: 2000
+check_val_every_n_epoch: 25
+patience: 50
+min_delta: 0.001
+
+# Configuring hydra
+hydra:
+  run:
+    dir: ./hydra/${project}/${experiment_description}
+
+  sweep:
+    dir: ./hydra/${project}/
+    subdir: ${experiment_description}

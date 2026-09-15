@@ -1,0 +1,56 @@
+defaults:
+  - base
+  - _self_ # Stop hydra from complaining
+  - override hydra/launcher: joblib # For grid searching in parallel
+
+# Compute enviornment
+seed: -1
+device: 2
+precision: float32
+debug: False
+
+# Experiment
+project: CI_type_I_error
+dataset: post_nonlinear_yang2025_ci
+sample_size: 1_000 # 64000 # 256000 # 64000
+fraction_train: 0.7 # 0.8 yields 50 batches @ 4096; 0.75 yields 46.875
+fraction_val: 0.15
+fraction_test: 0.15
+
+conditional_independent: True # False (Can set to false or true at will)
+dim_x: 1
+dim_y: 1
+dim_z: 100
+experiment_description: dataset=${dataset}/ci=${conditional_independent}/dZ=${dim_z}/N=${sample_size}/d=${output_dim} L=${n_hidden} LS=${layer_size} A=${activation}/rso=${reg_str_outer} rsi=${reg_str_inner} steps_inner=${steps_inner} bs=${batch_size}
+
+# Model hyperparameters
+stack_xz: False
+stack_yz: True
+output_dim: 4
+n_hidden: 1 # 2
+layer_size: 128 # 32
+activation: Tanh
+perc_dim_prune: 0.1
+use_batchnorm: False
+
+# Optimization hyperparameters
+lr_outer: 0.0003
+lr_inner: 0.0003
+reg_str_outer: 1 #alpha=0.01 rejection hyper: 50    ;alpha=0.2 rejection hyper: 3.5
+reg_str_inner: 10 #alpha=0.01 rejection hyper: 50    ;alpha=0.2 rejection hyper: 3.5
+regularizer: orthonormal_logfro_reg
+steps_inner: 2
+batch_size: 128 # 1024
+max_epochs_warm_inner: 50
+max_epochs: 200
+check_val_every_n_epoch: 200
+patience: 25
+min_delta: 0.001
+
+# Test hyperparameters
+reg_whitening: 0 # 1e-6
+repeats: 0
+k_perm: 666
+alpha: 0.05 # Set as default 0.05
+
+save_model: False
