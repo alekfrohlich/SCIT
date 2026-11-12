@@ -23,7 +23,7 @@ From the repository root, run
 python reproduce.py
 ```
 
-This reproduces figures 2 and 5 of the paper using hyperparameter values as described in Appendix C. Experimental results are saved to `results/`. 
+This reproduces figures 2 and 5 of the paper using hyperparameter values as described in Appendix C. Experimental results are saved to `results/`. Note: reproduction scripts are being finalized.
 
 ## Citation
 
