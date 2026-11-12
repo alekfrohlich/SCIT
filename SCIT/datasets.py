@@ -4,7 +4,6 @@ import math
 import random
 
 import numpy as np
-import pyro.distributions as D
 import torch
 from scipy import stats
 from torch import Tensor
@@ -141,7 +140,7 @@ def linear_ci(
     if seed is not None:
         np.random.seed(seed)
         random.seed(seed)
-    
+
     A = np.array(
         [
             [3, 2, -1, 4],
@@ -190,6 +189,7 @@ def postnonlinear_nonsmooth_test_ci(
     **kwargs,
 ):
     """Post-nonlinear with non-smooth transformation CI dataset."""
+
     def function_f(x):
         activation_function = np.where(np.abs(x) < 1, np.cos(2 * np.pi / x), x**2)
         correction_for_nan = np.nan_to_num(activation_function, nan=1)
@@ -428,7 +428,7 @@ def linear_cauchy_ci(
     if seed is not None:
         torch.manual_seed(seed)
         np.random.seed(seed)
-    
+
     cauchy = torch.distributions.Cauchy(loc=0.0, scale=1.0)
     z = cauchy.sample((sample_size, dim_z))
     z_mean = z.mean(dim=1, keepdim=True)
@@ -445,12 +445,12 @@ def linear_cauchy_ci(
     x = x.numpy()
     y = y.numpy()
     z = z.numpy()
-    
+
     if normalize:
         x = (x - x.mean(axis=0)) / (x.std(axis=0) + 1e-8)
         y = (y - y.mean(axis=0)) / (y.std(axis=0) + 1e-8)
         z = (z - z.mean(axis=0)) / (z.std(axis=0) + 1e-8)
-    
+
     return x, y, z
 
 
