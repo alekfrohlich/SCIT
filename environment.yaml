@@ -1,0 +1,31 @@
+# Linux x86_64 / Python 3.11 / PyTorch CUDA 11.8 reproduction environment.
+name: reproducing_scit
+channels:
+  - defaults
+dependencies:
+  - python=3.11.13
+  - pip=25.2
+  - pip:
+      - --extra-index-url https://download.pytorch.org/whl/cu118
+
+      # SpectralCIT and synthetic data generation.
+      - numpy==1.26.4
+      - scipy==1.12.0
+      - torch==2.6.0+cu118
+      - tqdm==4.67.1
+
+      # KCIT/RCIT, NNLSCIT, GCM, GCIT and DGCIT.
+      - causal-learn==0.1.4.1
+      - momentchi2==0.1.8
+      - scikit-learn==1.6.1
+      - tensorflow==2.20.0
+      - keras==3.12.0
+      - numba==0.58.1
+      - xgboost==3.1.1
+      - lightgbm==4.6.0
+      - pandas==2.2.3
+
+      # Paper figures
+      - matplotlib==3.10.1
+      - seaborn==0.13.2
+      - cycler==0.12.1
