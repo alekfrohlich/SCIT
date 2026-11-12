@@ -9,8 +9,6 @@ from scipy import stats
 from torch import Tensor
 from torch.utils.data import TensorDataset, random_split
 
-import SCIT.distributions as D2
-
 
 # ======================================================================================================================
 # CONDITIONAL INDEPENDENCE TESTING
